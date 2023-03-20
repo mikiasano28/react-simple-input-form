@@ -8,6 +8,15 @@ const SimpleInput = (props) => {
   const enteredNameIsValid = enteredName.trim() !== "";
   const nameInputIsInValid = !enteredNameIsValid && enterdNameIsTouched;
 
+  useEffect(() => {
+    if (enteredNameIsValid) {
+      setFormIsValid(true);
+    } else {
+      setFormIsValid(false);
+    }
+  }, [enteredNameIsValid])
+
+
   const nameInputChangeHandler = (event) => {
     setEnteredName(event.target.value);
   }
@@ -56,7 +65,7 @@ const SimpleInput = (props) => {
         {!nameInputIsInValid &&<p className='error-text'>Name must not be empty!</p>}
       </div>
       <div className="form-actions">
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
